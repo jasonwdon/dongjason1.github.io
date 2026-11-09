@@ -1,0 +1,124 @@
+:root {
+  --ink: #222;
+  --muted: #555;
+  --paper: #fffdf7;
+  --card: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 16px;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: 'Gaegu', 'Comic Sans MS', cursive;
+  font-size: 22px;
+  line-height: 1.35;
+}
+
+header, main, footer {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+header {
+  text-align: center;
+  padding: 56px 0 32px;
+}
+
+h1 {
+  font-size: 3.2rem;
+  margin: 0 0 8px;
+}
+
+.tagline {
+  margin: 0;
+  color: var(--muted);
+}
+
+a { color: var(--ink); }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 28px;
+}
+
+.card {
+  background: var(--card);
+  border: 3px solid var(--ink);
+  /* uneven radii give a hand-drawn wobble */
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+  padding: 24px 26px;
+  transform: rotate(var(--tilt, 0deg));
+  box-shadow: 6px 6px 0 var(--accent, #ddd);
+  transition: transform 0.15s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover { transform: rotate(0deg) translateY(-3px); }
+
+.card h2 {
+  margin: 0 0 8px;
+  font-size: 2rem;
+}
+
+.card p { margin: 0 0 12px; }
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.tags li {
+  font-size: 0.8em;
+  padding: 0 10px;
+  border: 2px solid var(--ink);
+  border-radius: 12px 4px 12px 4px;
+  background: var(--accent, #eee);
+}
+
+.actions {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.button {
+  text-decoration: none;
+  font-weight: 700;
+  padding: 2px 16px;
+  border: 3px solid var(--ink);
+  border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px;
+  background: var(--accent, #eee);
+}
+
+.button:hover { background: var(--ink); color: var(--paper); }
+
+.badge {
+  font-size: 0.85em;
+  color: var(--muted);
+  border: 2px dashed var(--muted);
+  border-radius: 10px;
+  padding: 0 10px;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  padding: 48px 0 32px;
+  font-size: 0.9em;
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 2.4rem; }
+  header { padding-top: 36px; }
+  .card { transform: none; }
+}
