@@ -59,12 +59,9 @@ a {
   padding: 24px 26px;
   transform: rotate(var(--tilt, 0deg));
   box-shadow: 6px 6px 0 var(--accent, #ddd);
-  transition: transform 0.15s ease;
   display: flex;
   flex-direction: column;
 }
-
-.card:hover { transform: rotate(0deg) translateY(-3px); }
 
 .card h2 {
   margin: 0 0 8px;
