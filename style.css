@@ -37,7 +37,13 @@ h1 {
   color: var(--muted);
 }
 
-a { color: var(--ink); }
+a {
+  color: var(--ink);
+  cursor: pointer;
+}
+
+/* keep the pointer over the icons' drawn lines too */
+.social a svg { pointer-events: none; }
 
 .grid {
   display: grid;
