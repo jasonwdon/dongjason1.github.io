@@ -1,32 +1,203 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>Time · Jason</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css?v=8">
-  <style>
-    main.post { max-width: 720px; }
-    .post p { margin: 0 0 18px; }
-    .draft { display: inline-block; margin-bottom: 18px; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Time is Made Up</title>
+<meta name="description" content="A lightning talk on how language shapes the way we talk about time.">
+<meta property="og:title" content="Time is Made Up">
+<meta property="og:description" content="A lightning talk on how language shapes the way we talk about time.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://jasonwdon.github.io/time/">
+<style>
+/* Layout: one column. Each "slide" is a framed charcoal panel echoing the original deck; the talk sits under it as plain prose on black. Single dark look by choice. */
+:root{
+  --bg:#0B0B0B; --slide:#222222; --slide-edge:#3A3A3A; --fg:#FFFFFF; --talk:#C9C9C9; --muted:#8C8C8C; --gloss:#F5A623; --link:#7FC8E8;
+  --font:Arial, "Helvetica Neue", Helvetica, "Liberation Sans", sans-serif;
+  color-scheme:dark;
+}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.col{max-width:46rem;margin:0 auto;padding-block:3rem 4rem;display:flex;flex-direction:column;gap:4.5rem}
+
+.block{display:flex;flex-direction:column;gap:1.6rem}
+.slide{background:var(--slide);border:1px solid var(--slide-edge);border-radius:4px;aspect-ratio:16/9;max-width:100%;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:clamp(.6rem,2vw,1.2rem);
+  padding:clamp(1.2rem,4vw,2.5rem);box-shadow:0 18px 40px rgba(0,0,0,.6);position:relative}
+.slide .n{position:absolute;right:.8rem;bottom:.6rem;font-size:.7rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.slide h1{font-weight:400;font-size:clamp(2rem,7vw,3.4rem);margin:0;line-height:1.1}
+.slide .sub{font-size:clamp(1.05rem,3.4vw,1.6rem);color:#A6A6A6;margin:0}
+.slide .by{font-size:clamp(.8rem,2.2vw,.95rem);color:#D0D0D0;margin:.6rem 0 0}
+.slide .by a{color:inherit;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:.2em}
+.slide .ctx{font-size:clamp(.72rem,2vw,.85rem);color:var(--muted);margin:0}
+.slide .big{font-size:clamp(1.6rem,5.5vw,2.6rem);margin:0}
+.slide .q{font-size:clamp(1rem,3.2vw,1.45rem);margin:0;line-height:1.3}
+.slide .q.sm{font-size:clamp(.9rem,2.6vw,1.1rem)}
+.slide b{font-weight:700}
+.slide .cite{font-size:clamp(.85rem,2.6vw,1.1rem);margin:0;align-self:center}
+.slide .tiny{font-size:clamp(.7rem,2vw,.82rem);color:#D6D6D6;max-width:34rem;margin:0;line-height:1.35}
+
+.talk{max-width:38rem;font-size:1.05rem;line-height:1.7;color:var(--talk);padding-left:1.1rem;border-left:2px solid var(--slide-edge)}
+.talk p{margin:0 0 1rem}.talk p:last-child{margin:0}
+.talk em{color:var(--fg)}
+
+.verbs{display:grid;grid-template-columns:auto auto;gap:clamp(.6rem,2.4vw,1.1rem) clamp(1.5rem,7vw,4rem);text-align:left;align-items:start}
+.verbs div{font-size:clamp(1rem,3.4vw,1.45rem)}
+.verbs span{display:block;font-size:clamp(.65rem,2vw,.8rem);color:var(--gloss);margin-left:.6em}
+
+.slide svg{width:100%;max-width:30rem;height:auto}
+.slide svg text{font-family:var(--font)}
+
+.sources{align-items:stretch;text-align:left;justify-content:flex-start;aspect-ratio:auto}
+.sources h2{font-weight:400;font-size:clamp(1.1rem,3.6vw,1.6rem);margin:0}
+.sources ul{margin:0;padding-left:1.1rem;font-size:clamp(.8rem,2.4vw,.95rem);color:#BDBDBD;line-height:1.5}
+.sources li{overflow-wrap:anywhere}
+a{color:var(--link)}
+a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+
+.end{color:var(--muted);font-size:.85rem;text-align:center}
+</style>
 </head>
 <body>
-  <header>
-    <h1>Time</h1>
-  </header>
+<div class="col">
 
-  <main class="post">
-    <p><span class="badge draft">Draft</span></p>
-    <p>This post is coming soon.</p>
-  </main>
+<div class="block">
+  <div class="slide">
+    <h1>Time is Made Up</h1>
+    <p class="sub">A Linguistic Perspective</p>
+    <p class="by"><a href="/">by Jason</a></p>
+    <p class="ctx">A lightning talk from Etsy's Eng Week, 2020</p>
+  </div>
+  <div class="talk"><p>This talk looks at time from a linguistic perspective. The idea came, as usual, from going down a rabbit hole during an important meeting.</p></div>
+</div>
 
-  <footer>
-    <p><a href="https://jasonwdon.github.io/">Made by Jason</a></p>
-  </footer>
+<div class="block">
+  <div class="slide"><p class="q">“I look forward to our meeting”</p><span class="n">2</span></div>
+  <div class="talk">
+    <p>The rabbit hole starts here. We say we <em>look forward</em> to something in the future, as if the event were physically in front of us. Time is completely abstract. Nobody can point in a direction and say, that's where the future is.</p>
+    <p>English gives time a spatial dimension anyway, to make it easier to understand. The future is in front of us and the past is behind us. That makes sense, right?</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="q">“I look forward to our meeting”</p><p class="q">“Can we push our meeting back?”</p><span class="n">3</span></div>
+  <div class="talk">
+    <p>Then we ask to push a meeting <em>back</em>, and we mean move it further into the future. Push it… back… to the future?</p>
+    <p>We can actually explain this. If an object is in front of us and we want it to back up, we push it backwards. Time is still a dimension, future events are objects in front of us, and pushing them back sends them further into the future. So what do we say when we want a meeting earlier?</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="q">“I look forward to our meeting”</p><p class="q">“Can we push our meeting back?”</p><p class="q">“Let's move it up instead”</p><span class="n">4</span></div>
+  <div class="talk">
+    <p>We move time… up? This is still consistent with the object metaphor. Things close to us are <em>up close</em>, and we ask people to <em>bring it up</em> to us. Directionally we're all over the place, but technically we're consistent.</p>
+    <p>All of this is linguistics, the scientific study of language. Applied to computer science, it gives us tools like spelling correction and machine translation. But natural language processing has been moving away from classical linguistics and toward statistical machine learning for a long time now.</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="q">Anytime a linguist leaves the group the recognition rate goes up</p><p class="cite">— Frederick Jelinek</p><span class="n">5</span></div>
+  <div class="talk"><p>A speech recognition researcher is often quoted saying this. I prefer a quote from my favorite linguist.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="q">“Why waste time say lot word when few word do trick?”</p><p class="cite">— Kevin Malone</p><span class="n">6</span></div>
+  <div class="talk"><p>Okay, but back to time.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="big">Time is a dimension</p><span class="n">7</span></div>
+  <div class="talk"><p>As we've seen, time is a dimension, and in English it's a one-dimensional line. Sometimes it runs forwards and backwards. Other times it's a timeline from left to right.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="q">“Can we move the meeting <b>up</b>?”</p><p class="q">“Time's <b>up</b>!”</p><p class="q">“I could use some <b>down</b>time”</p><span class="n">8</span></div>
+  <div class="talk"><p>We also use "up", like moving a meeting up or "time's up!" There's no moving meetings down or time being down, but we do have uptime and downtime.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide">
+    <svg viewBox="0 0 480 230" role="img" aria-labelledby="mdT">
+      <title id="mdT">後天 hòu tiān, day after tomorrow, uses hòu meaning behind. 前天 qián tiān, day before yesterday, uses qián meaning front.</title>
+      <text x="120" y="22" fill="#FFFFFF" font-size="13" text-anchor="middle">Hòu: rear/back/behind</text>
+      <line x1="120" y1="58" x2="120" y2="32" stroke="#FFFFFF" stroke-width="1"/><path d="M116,37 L120,30 L124,37" fill="none" stroke="#FFFFFF"/>
+      <text x="120" y="98" fill="#FFFFFF" font-size="36" text-anchor="middle">後 天</text>
+      <text x="230" y="90" fill="#FFFFFF" font-size="14">Day after tomorrow (future)</text>
+      <text x="120" y="152" fill="#FFFFFF" font-size="36" text-anchor="middle">前 天</text>
+      <text x="230" y="144" fill="#FFFFFF" font-size="14">Day before yesterday (past)</text>
+      <line x1="120" y1="168" x2="120" y2="196" stroke="#FFFFFF" stroke-width="1"/><path d="M116,191 L120,198 L124,191" fill="none" stroke="#FFFFFF"/>
+      <text x="120" y="218" fill="#FFFFFF" font-size="13" text-anchor="middle">Qián: front/forwards</text>
+    </svg>
+    <span class="n">9</span>
+  </div>
+  <div class="talk"><p>In Mandarin, time is also dimensional, but it moves in the opposite direction! The day after tomorrow is <em>hòu tiān</em>, and "in the future" is <em>yǐ hòu</em>, both using the word for behind. For the past we say <em>qián tiān</em> and <em>yǐ qián</em>, using the word for front. This isn't wrong, just a different perspective. Think of time as a book: the beginning is at the front, and the end is at the back.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="big">Time is money</p><span class="n">10</span></div>
+  <div class="talk"><p>Another common metaphor in English is time as money, a valuable commodity.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="q">“<b>Spend</b> more time with your friends”</p><p class="q">“<b>Save</b> some time for me!”</p><p class="q">“<b>Budget</b> your time accordingly”</p><span class="n">11</span></div>
+  <div class="talk"><p>Every day we spend time, save time and budget our time, always thinking about what it's worth.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="q">“There's no time to <b>waste</b>!”</p><p class="q">“Living on <b>borrowed</b> time”</p><p class="q">“I've <b>invested</b> a lot of time in this”</p><span class="n">12</span></div>
+  <div class="talk"><p>In darker ways, time can be wasted. It can be borrowed, which means we owe time to someone or something. Worst of all, we invest time, which suggests we're taking a risk and expecting returns. Good thing investments only go up, right?</p></div>
+</div>
+
+<div class="block">
+  <div class="slide">
+    <div class="verbs">
+      <div>English:</div><div>Spend time</div>
+      <div>Spanish:</div><div>Pasar el tiempo<span>Pass</span></div>
+      <div>Czech:</div><div>Trávit čas<span>Digest</span></div>
+    </div>
+    <span class="n">13</span>
+  </div>
+  <div class="talk">
+    <p>The phenomenon isn't universal. In Spanish you don't spend time, you pass it. In Czech, you don't spend it, you digest it! I think it's funny to think of time as something you're continually eating. It takes enjoying your time to a whole new level.</p>
+    <p>It's not perfect, and these languages have other ways of describing time as money, but it's fun to see time through a different lens.</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="slide">
+    <p class="big">Time is...</p>
+    <p class="tiny">the indefinite continued progress of existence and events in the past, present, and future regarded as a whole</p>
+    <p class="tiny">the progression of events from the past to the present into the future</p>
+    <p class="tiny">the continued sequence of existence and events that occurs in an apparently irreversible succession from the past, through the present, into the future</p>
+    <span class="n">14</span>
+  </div>
+  <div class="talk">
+    <p>So to bring it all together, what is time, really? We have definitions, but they all use time to define time. Past, present and future do all the work, which makes them circular. To make it easier to understand, we have these metaphors. Is time money? A dimension? A digestive tract? In physics, time is relative. Relative to light? To me and you? Maybe time is just the speed of the computer that's simulating our reality.</p>
+    <p>On a more personal note, I can't help but feel the pressure not to waste time. The internet constantly tells us to pack more into our schedules. I can't tell you what time really is, but our language mirrors our perspective. What if we didn't see time as a limited resource, but as the naturally occurring phenomenon that it is?</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="slide"><p class="big">Time is</p><span class="n">15</span></div>
+  <div class="talk"><p>We would never say we're wasting gravity, or that we've spent too much light, ya know? So smell the roses, pet the dogs. Time is made up, so we might as well enjoy it.</p></div>
+</div>
+
+<div class="block">
+  <div class="slide sources">
+    <h2>Sources + fun links</h2>
+    <ul>
+      <li><a href="https://en.wikipedia.org/wiki/Metaphors_We_Live_By">Metaphors We Live By</a></li>
+      <li><a href="https://www.k-international.com/blog/time-in-different-languages-and-cultures/">6 cool facts about time in different cultures</a></li>
+      <li><a href="https://www.popsci.com/language-time-perception/">Language and time perception</a></li>
+      <li>Catalan's time system uses +1 indexing, Swahili clocks are upside down, the Hopi time controversy: <a href="https://www.quora.com/Which-languages-tell-the-time-in-interesting-ways">languages that tell time in interesting ways</a></li>
+      <li><a href="https://www.babbel.com/en/magazine/language-affect-perception-time">How language affects the perception of time</a></li>
+      <li><a href="http://language.ucsd.edu/papers/language-time.pdf">Language and time (UCSD)</a></li>
+      <li>Famous linguists: Robin Lakoff, Erving Goffman, Eve Sweetser, Edward Sapir, Benjamin Lee Whorf</li>
+    </ul>
+  </div>
+  <div class="talk"><p>That's my time! Thanks for reading :D</p></div>
+</div>
+
+</div>
 </body>
 </html>
