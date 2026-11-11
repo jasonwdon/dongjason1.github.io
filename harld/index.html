@@ -107,7 +107,7 @@
   <h1>harld</h1>
   <p class="byline"><a href="https://jasonwdon.github.io/">by jason</a></p>
 
-  <p>In 2019 I was taking EECS 325, Computer Networks I (now known as CSDS 325) with Dr. Michael Rabinovich when he kindly showed us that the university&rsquo;s email relay would forward whatever you handed it. As long as you were on the campus network, it didn&rsquo;t check the contents, who you were sending it to, and most importantly, whether or not you were actually the person in the &ldquo;From&rdquo; line.</p>
+  <p>In 2019 I was at Case Western Reserve University taking EECS 325(Computer Networks I now known as CSDS 325) with Dr. Michael Rabinovich when he kindly showed us that the university&rsquo;s email relay would forward anything you sent it. It didn&rsquo;t check the contents, who you were sending it to, and most importantly, whether or not you were actually the person in the &ldquo;From&rdquo; line.</p>
 
   <p>Sending an email pretending to be the university president (Barbara Snyder aka Babs) was easy as a few lines of Python:</p>
 
@@ -118,7 +118,7 @@
 
 <span class="k">def</span> <span class="f">emailSender</span>(subject, sender, to, body):
     msg = MIMEMultipart(<span class="s">'alternative'</span>)
-    msg[<span class="s">'From'</span>]    = sender          <span class="c"># &larr; whoever you wanted to be</span>
+    msg[<span class="s">'From'</span>]    = sender          <span class="c"># whoever you wanted to be</span>
     msg[<span class="s">'To'</span>]      = to              <span class="c"># whoever you wanted to send an email to</span>
     msg[<span class="s">'Subject'</span>] = subject
     msg.attach(MIMEText(body, <span class="s">'html'</span>))   <span class="c"># attach any HTML you want as the body</span>
@@ -128,9 +128,9 @@
     <figcaption>That was the whole trick, the relay never asked for anything else as long as you were logged in with your school credentials to the university wifi.</figcaption>
   </figure>
 
-  <p>So we sent emails pretending to be professors, celebrities, and other students. Bonus points when you send someone an email as themselves from the future. Then someone had a better idea.</p>
+  <p>Suddenly, our friends were getting concerning emails from professors, celebrities, and even from themselves, from the future. Then someone had a better idea.</p>
 
-  <p>If you lived in the dorms, packages went to a central hub and you&rsquo;d get an email from HARLD (The Housing and Residence Life Database) telling you to pick it up. We decided to copy the HTML out of a real package notification and send it to our friends who didn&rsquo;t actually have a package.</p>
+  <p>If you lived in the dorms, packages were delivered to a central hub and you&rsquo;d get an email from HARLD (The Housing and Residence Life Database) telling you to pick it up. We figured that if we made the message look urgent enough, we could get someone down to the common area in record time.</p>
 
   <figure>
     <div class="email">
@@ -153,15 +153,15 @@
     </div>
   </figure>
 
-  <p>We would then sit in the study room across from the package room and see how long it took them to show up. After a few hours, someone would come down, try to claim a package that didn&rsquo;t exist, get confused, then spot us and wander over to say hi. It got to a point where the desk staff were telling people &ldquo;sorry that&rsquo;s been happening a lot and we can&rsquo;t figure out why&rdquo;.</p>
+  <p>We would then sit in a nearby study room and see how long it would take them to show up. After a few hours, someone would come down, try to claim a package that didn&rsquo;t exist, get confused, then wander over to say hi. It got to the point where the desk staff were apologizing and telling people they didn't know why this kept happening.</p>
 
-  <p>The following year, the &ldquo;trick&rdquo; stopped working. We assume IT patched the email server to force some kind of auth.</p>
+  <p>The following year, the server stopped forwarding our spoofed messages. IT probably patched the email server to force some kind of auth but for some reason they left a door open so you could still send someone an email as themselves. There wasn't as much we could do with this but still a strange gap to leave. I've always wondered if they ever fixed it or if it still works today.</p>
 
   <h2>side note</h2>
 
-  <p>Avengers Endgame came out around the same time and someone emailed the whole school: <span class="spoiler">Tony Stark Dies</span>. My understanding is that there was no hack. The university just left one of its school wide mailing lists with open posting permissions and it went unnoticed for months. Whoever knew about the group and waited to send the spoiler is a sociopath and I hope both sides of their pillow are warm tonight.</p>
+  <p>Avengers Endgame came out around the same time and someone emailed the whole school: <span class="spoiler">Tony Stark Dies</span>. My understanding is that there was no hack and they didn't even use the open smtp relay. The university just left one of its school wide mailing lists with open posting permissions and it went unnoticed for months. Whoever found that list and sat on it until opening weekend has my absolute respect and admiration.</p>
 
-  <p class="footnote"><a href="https://www.reddit.com/r/cwru/comments/1khqari/craziest_lore_youve_ever_heard_at_case/">This Reddit thread</a> has some more iconic CWRU lore.</p>
+  <p class="footnote">Checkout <a href="https://www.reddit.com/r/cwru/comments/1khqari/craziest_lore_youve_ever_heard_at_case/">this Reddit thread</a> for more CWRU lore.</p>
 
 </article>
 
