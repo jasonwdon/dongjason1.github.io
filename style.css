@@ -1,20 +1,22 @@
 :root {
-  --ink: #222;
-  --muted: #555;
+  --ink: #1d1d1f;
+  --muted: #5f5b53;
   --paper: #efeadf;
   --card: #ffffff;
+  --line: rgba(29, 29, 31, 0.12);
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  padding: 0 16px;
+  padding: 0 20px;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Gaegu', 'Comic Sans MS', cursive;
-  font-size: 22px;
-  line-height: 1.35;
+  font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
 }
 
 header, main, footer {
@@ -24,11 +26,14 @@ header, main, footer {
 
 header {
   text-align: center;
-  padding: 56px 0 32px;
+  padding: 72px 0 40px;
 }
 
 h1 {
-  font-size: 3.2rem;
+  font-size: 2.6rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
   margin: 0 0 8px;
 }
 
@@ -48,97 +53,99 @@ a {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 28px;
+  gap: 20px;
 }
 
 .card {
   background: var(--card);
-  border: 3px solid var(--ink);
-  /* uneven radii give a hand-drawn wobble */
-  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
-  padding: 24px 26px;
-  transform: rotate(var(--tilt, 0deg));
-  box-shadow: 6px 6px 0 var(--accent, #ddd);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
   display: flex;
   flex-direction: column;
 }
 
 .card h2 {
-  margin: 0 0 8px;
-  font-size: 2rem;
-}
-
-.card p { margin: 0 0 12px; }
-
-.tags {
-  list-style: none;
-  padding: 0;
-  margin: 0 0 16px;
+  margin: 0 0 6px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  align-items: center;
+  gap: 10px;
 }
 
-.tags li {
-  font-size: 0.8em;
-  padding: 0 10px;
-  border: 2px solid var(--ink);
-  border-radius: 12px 4px 12px 4px;
-  background: var(--accent, #eee);
+/* a small swatch of each project's color */
+.card h2::before {
+  content: '';
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent, var(--line));
 }
+
+.card p { margin: 0 0 20px; color: var(--muted); }
 
 .actions {
   margin-top: auto;
   display: flex;
   align-items: center;
   gap: 18px;
+  font-size: 0.94em;
+  font-weight: 500;
 }
+
+.actions a:not(.button) { text-decoration: none; color: var(--muted); }
+.actions a:not(.button):hover { color: var(--ink); text-decoration: underline; }
 
 .button {
   text-decoration: none;
-  font-weight: 700;
-  padding: 2px 16px;
-  border: 3px solid var(--ink);
-  border-radius: 15px 255px 15px 225px / 225px 15px 255px 15px;
-  background: var(--accent, #eee);
+  padding: 7px 16px;
+  border-radius: 8px;
+  background: var(--ink);
+  color: #fff;
 }
 
-.button:hover { background: var(--ink); color: var(--paper); }
+.button:hover { background: #3a3a3d; }
 
 .badge {
-  font-size: 0.85em;
+  font-size: 0.8em;
+  font-weight: 500;
   color: var(--muted);
-  border: 2px dashed var(--muted);
-  border-radius: 10px;
-  padding: 0 10px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 2px 10px;
+  background: var(--card);
 }
 
 footer {
   text-align: center;
   color: var(--muted);
-  padding: 48px 0 32px;
+  padding: 56px 0 40px;
   font-size: 0.9em;
 }
+
+footer p { margin: 0 0 10px; }
 
 .social {
   display: flex;
   justify-content: center;
-  gap: 18px;
-  margin: 0 0 8px;
+  gap: 14px;
 }
 
 .social a {
-  color: var(--ink);
+  color: var(--muted);
   display: inline-flex;
   padding: 4px;
-  transition: transform 0.15s ease;
 }
 
 .social a:hover,
-.social a:focus-visible { transform: rotate(-6deg) scale(1.1); }
+.social a:focus-visible { color: var(--ink); }
 
 @media (max-width: 480px) {
-  h1 { font-size: 2.4rem; }
-  header { padding-top: 36px; }
-  .card { transform: none; }
+  body { padding: 0 16px; }
+  h1 { font-size: 2.1rem; }
+  header { padding: 48px 0 28px; }
 }
