@@ -1,32 +1,181 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="noindex">
-  <title>HARLD · Jason</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@300;400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../style.css?v=8">
-  <style>
-    main.post { max-width: 720px; }
-    .post p { margin: 0 0 18px; }
-    .draft { display: inline-block; margin-bottom: 18px; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>harld</title>
+<meta name="description" content="The time we found out we could email anyone at school as anyone.">
+<style>
+  :root{
+    --bg:#fbfbf9;
+    --fg:#1c1c1a;
+    --muted:#6b6b64;
+    --rule:#e6e4dd;
+    --link:#b5451b;
+    --link-hover:#8f3413;
+    --card:#f3f1ea;
+    --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#17171a; --fg:#e9e8e3; --muted:#9a998f; --rule:#2c2c30;
+      --link:#ff7a4d; --link-hover:#ff9670; --card:#202024;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#17171a; --fg:#e9e8e3; --muted:#9a998f; --rule:#2c2c30;
+    --link:#ff7a4d; --link-hover:#ff9670; --card:#202024;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg); color:var(--fg);
+    font-family:var(--sans); font-size:18px; line-height:1.68;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:660px; margin:0 auto; padding:64px 20px 88px;}
+  h1{
+    font-size:clamp(2.1rem, 7vw, 2.9rem); line-height:1.05;
+    letter-spacing:-0.02em; margin:0 0 6px; font-weight:800;
+  }
+  .byline{margin:0 0 36px; font-size:16px; color:var(--muted);}
+  .byline a{
+    color:var(--muted); text-decoration:none;
+    border-bottom:1px solid var(--rule); cursor:pointer;
+  }
+  .byline a:hover{color:var(--link); border-bottom-color:var(--link);}
+  h2{font-size:1.3rem; letter-spacing:-0.01em; margin:48px 0 4px; font-weight:700;}
+  p{margin:0 0 22px;}
+  a{color:var(--link); text-decoration:none; cursor:pointer;
+    border-bottom:1px solid color-mix(in srgb, var(--link) 35%, transparent);}
+  a:hover{color:var(--link-hover); border-bottom-color:var(--link-hover);}
+
+  /* code figure */
+  figure{margin:30px 0;}
+  pre.code{
+    background:#1e1e22; color:#e6e6e6; font-family:var(--mono);
+    font-size:13.5px; line-height:1.6; margin:0; padding:18px 20px;
+    border-radius:10px; overflow-x:auto;
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  pre.code .c{color:#7f8a7a;}      /* comment */
+  pre.code .s{color:#d6a35c;}      /* string  */
+  pre.code .k{color:#c98fff;}      /* keyword */
+  pre.code .f{color:#6bb3e6;}      /* name    */
+  figcaption{color:var(--muted); font-size:14.5px; margin-top:10px; font-style:italic;}
+
+  /* rendered email mock */
+  .email{
+    background:#ffffff; color:#2a2a2a; border:1px solid #e2e0d9;
+    border-radius:10px; padding:0; overflow:hidden; font-size:15px; line-height:1.55;
+    box-shadow:0 1px 0 rgba(0,0,0,0.03);
+  }
+  .email .ehead{background:#f3f4f3; padding:12px 18px; border-bottom:1px solid #e6e4dd;}
+  .email .efrom{font-size:12.5px; color:#6a6a6a;}
+  .email .esubj{font-size:14.5px; font-weight:700; color:#15324d; margin-top:3px;}
+  .email .ebody{padding:18px 20px;}
+  .email p{margin:0 0 12px; color:#2a2a2a;}
+  .email table{border-collapse:collapse; margin:4px 0 10px; font-size:14px;}
+  .email th{text-align:right; color:#6a6a6a; font-weight:600; padding:2px 10px 2px 0; white-space:nowrap; vertical-align:top;}
+  .email td{padding:2px 0;}
+  .email .efoot{border-top:1px solid #ececec; margin-top:6px; padding-top:10px; font-size:12.5px; color:#8a8a8a;}
+  .email .efoot b{color:#0a304e; font-weight:600;}
+  .email .tag{color:#b5451b; font-weight:600;}
+
+  /* spoiler (click to toggle) */
+  .spoiler{
+    cursor:pointer; background:var(--fg); color:transparent;
+    border-radius:4px; padding:0 4px; white-space:nowrap;
+    -webkit-user-select:none; user-select:none;
+    transition:background .15s ease, color .15s ease;
+  }
+  .spoiler:hover{opacity:.88;}
+  .spoiler.revealed{background:color-mix(in srgb, var(--link) 16%, transparent); color:var(--fg);}
+
+  .footnote{
+    margin-top:46px; padding-top:16px; border-top:1px solid var(--rule);
+    font-size:14px; color:var(--muted);
+  }
+  .footnote a{color:var(--muted); border-bottom-color:var(--rule);}
+  .footnote a:hover{color:var(--link); border-bottom-color:var(--link);}
+</style>
 </head>
 <body>
-  <header>
-    <h1>HARLD</h1>
-  </header>
+<article class="wrap">
 
-  <main class="post">
-    <p><span class="badge draft">Draft</span></p>
-    <p>This post is coming soon. It will be about how I found out that email at my university could be spoofed.</p>
-  </main>
+  <h1>harld</h1>
+  <p class="byline"><a href="https://jasonwdon.github.io/">by jason</a></p>
 
-  <footer>
-    <p><a href="https://jasonwdon.github.io/">Made by Jason</a></p>
-  </footer>
+  <p>In 2019 I was taking EECS 325, Computer Networks I (now known as CSDS 325) with Dr. Michael Rabinovich when he kindly showed us that the university&rsquo;s email relay would forward whatever you handed it. As long as you were on the campus network, it didn&rsquo;t check the contents, who you were sending it to, and most importantly, whether or not you were actually the person in the &ldquo;From&rdquo; line.</p>
+
+  <p>Sending an email pretending to be the university president (Barbara Snyder aka Babs) was easy as a few lines of Python:</p>
+
+  <figure>
+    <pre class="code"><span class="k">import</span> smtplib
+<span class="k">from</span> email.mime.multipart <span class="k">import</span> MIMEMultipart
+<span class="k">from</span> email.mime.text <span class="k">import</span> MIMEText
+
+<span class="k">def</span> <span class="f">emailSender</span>(subject, sender, to, body):
+    msg = MIMEMultipart(<span class="s">'alternative'</span>)
+    msg[<span class="s">'From'</span>]    = sender          <span class="c"># &larr; whoever you wanted to be</span>
+    msg[<span class="s">'To'</span>]      = to              <span class="c"># whoever you wanted to send an email to</span>
+    msg[<span class="s">'Subject'</span>] = subject
+    msg.attach(MIMEText(body, <span class="s">'html'</span>))   <span class="c"># attach any HTML you want as the body</span>
+
+    s = smtplib.SMTP(<span class="s">'smtp.case.edu'</span>)   <span class="c"># connect to the university's email server</span>
+    s.send_message(msg)                 <span class="c"># off it goes, as "sender"</span></pre>
+    <figcaption>That was the whole trick, the relay never asked for anything else as long as you were logged in with your school credentials to the university wifi.</figcaption>
+  </figure>
+
+  <p>So we sent emails pretending to be professors, celebrities, and other students. Bonus points when you send someone an email as themselves from the future. Then someone had a better idea.</p>
+
+  <p>If you lived in the dorms, packages went to a central hub and you&rsquo;d get an email from HARLD (The Housing and Residence Life Database) telling you to pick it up. We decided to copy the HTML out of a real package notification and send it to our friends who didn&rsquo;t actually have a package.</p>
+
+  <figure>
+    <div class="email">
+      <div class="ehead">
+        <div class="efrom">NRV Area Office (Wade Commons) &lt;nrvareaoffice@case.edu&gt;</div>
+        <div class="esubj">[HARLD] You&rsquo;ve received a time-sensitive package! (PK1197482)</div>
+      </div>
+      <div class="ebody">
+        <p>You have a package waiting at <b>NRV Area Office (Wade Commons)</b>! Bring your CaseOneCard to the office to pick it up. <span class="tag">Refrigerate immediately!</span></p>
+        <p>Here are some details:</p>
+        <table><tbody>
+          <tr><th>Type:</th><td>Tupperware &mdash; Large</td></tr>
+          <tr><th>Delivery Date:</th><td>4/30/2019 1:03:00 PM</td></tr>
+          <tr><th>Carrier:</th><td>FedEx Ground/Home</td></tr>
+          <tr><th>Origin:</th><td>United States</td></tr>
+        </tbody></table>
+        <p>You can always access your waiting packages and mail in your myHousing.</p>
+        <div class="efoot"><b>Office of University Housing</b> &middot; housing@case.edu &middot; 216.368.3780</div>
+      </div>
+    </div>
+  </figure>
+
+  <p>We would then sit in the study room across from the package room and see how long it took them to show up. After a few hours, someone would come down, try to claim a package that didn&rsquo;t exist, get confused, then spot us and wander over to say hi. It got to a point where the desk staff were telling people &ldquo;sorry that&rsquo;s been happening a lot and we can&rsquo;t figure out why&rdquo;.</p>
+
+  <p>The following year, the &ldquo;trick&rdquo; stopped working. We assume IT patched the email server to force some kind of auth.</p>
+
+  <h2>side note</h2>
+
+  <p>Avengers Endgame came out around the same time and someone emailed the whole school: <span class="spoiler">Tony Stark Dies</span>. My understanding is that there was no hack. The university just left one of its school wide mailing lists with open posting permissions and it went unnoticed for months. Whoever knew about the group and waited to send the spoiler is a sociopath and I hope both sides of their pillow are warm tonight.</p>
+
+  <p class="footnote"><a href="https://www.reddit.com/r/cwru/comments/1khqari/craziest_lore_youve_ever_heard_at_case/">This Reddit thread</a> has some more iconic CWRU lore.</p>
+
+</article>
+
+<script>
+  document.querySelectorAll('.spoiler').forEach(function(el){
+    el.setAttribute('role','button');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('aria-label','spoiler, click to reveal');
+    el.setAttribute('title','click to reveal');
+    el.addEventListener('click', function(){ el.classList.toggle('revealed'); });
+    el.addEventListener('keydown', function(e){
+      if(e.key==='Enter' || e.key===' '){ e.preventDefault(); el.classList.toggle('revealed'); }
+    });
+  });
+</script>
 </body>
 </html>
