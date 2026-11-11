@@ -56,6 +56,33 @@ a{color:var(--link)}
 a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 
 .end{color:var(--muted);font-size:.85rem;text-align:center}
+
+/* Wider screens: slides grow to fill most of the viewport (16:9), leaving room for the talk text below, and everything is centered. Phones keep the layout above. */
+:root{--vh:1vh}
+@supports (height:100svh){:root{--vh:1svh}}
+@media (min-width:48rem) and (min-height:30rem){
+  :root{--sw:min(calc(100vw - 2rem), calc((100 * var(--vh) - 13rem) * 16 / 9))}
+  .col{max-width:none}
+  .block{align-items:center}
+  .slide{box-sizing:border-box;width:min(100%, var(--sw));gap:max(.6rem, calc(var(--sw) * .0261));padding:max(1.2rem, calc(var(--sw) * .0543))}
+  .slide .n{font-size:max(.7rem, calc(var(--sw) * .0152))}
+  .slide h1{font-size:max(2rem, calc(var(--sw) * .0739))}
+  .slide .sub{font-size:max(1.05rem, calc(var(--sw) * .0348))}
+  .slide .by{font-size:max(.8rem, calc(var(--sw) * .0207))}
+  .slide .ctx{font-size:max(.72rem, calc(var(--sw) * .0185))}
+  .slide .big{font-size:max(1.6rem, calc(var(--sw) * .0565))}
+  .slide .q{font-size:max(1rem, calc(var(--sw) * .0315))}
+  .slide .q.sm{font-size:max(.9rem, calc(var(--sw) * .0239))}
+  .slide .cite{font-size:max(.85rem, calc(var(--sw) * .0239))}
+  .slide .tiny{font-size:max(.7rem, calc(var(--sw) * .0178));max-width:calc(var(--sw) * .739)}
+  .verbs{gap:max(.6rem, calc(var(--sw) * .0239)) max(1.5rem, calc(var(--sw) * .087))}
+  .verbs div{font-size:max(1rem, calc(var(--sw) * .0315))}
+  .verbs span{font-size:max(.65rem, calc(var(--sw) * .0174))}
+  .slide svg{max-width:calc(var(--sw) * .652)}
+  .sources h2{font-size:max(1.1rem, calc(var(--sw) * .0348))}
+  .sources ul{font-size:max(.8rem, calc(var(--sw) * .0207))}
+  .talk{width:100%}
+}
 </style>
 </head>
 <body>
