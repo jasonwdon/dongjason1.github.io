@@ -28,7 +28,8 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);
 .slide h1{font-weight:400;font-size:clamp(2rem,7vw,3.4rem);margin:0;line-height:1.1}
 .slide .sub{font-size:clamp(1.05rem,3.4vw,1.6rem);color:#A6A6A6;margin:0}
 .slide .by{font-size:clamp(.8rem,2.2vw,.95rem);color:#D0D0D0;margin:.6rem 0 0}
-.slide .by a{color:inherit;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:.2em}
+.slide .by a{color:inherit;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:.2em;cursor:pointer;transition:color .15s ease,text-decoration-color .15s ease}
+.slide .by a:hover{color:var(--fg);text-decoration-color:currentColor}
 .slide .ctx{font-size:clamp(.72rem,2vw,.85rem);color:var(--muted);margin:0}
 .slide .big{font-size:clamp(1.6rem,5.5vw,2.6rem);margin:0}
 .slide .q{font-size:clamp(1rem,3.2vw,1.45rem);margin:0;line-height:1.3}
