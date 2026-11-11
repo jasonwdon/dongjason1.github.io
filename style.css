@@ -12,9 +12,9 @@ body {
   padding: 0 16px;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Gaegu', 'Comic Sans MS', cursive;
-  font-size: 22px;
-  line-height: 1.35;
+  font-family: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 19px;
+  line-height: 1.5;
 }
 
 header, main, footer {
@@ -29,6 +29,8 @@ header {
 
 h1 {
   font-size: 3.2rem;
+  font-weight: 300;
+  letter-spacing: -0.02em;
   margin: 0 0 8px;
 }
 
@@ -52,20 +54,32 @@ a {
 }
 
 .card {
+  position: relative;
   background: var(--card);
-  border: 3px solid var(--ink);
+  border: 2.5px solid var(--ink);
   /* uneven radii give a hand-drawn wobble */
   border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
   padding: 24px 26px;
   transform: rotate(var(--tilt, 0deg));
-  box-shadow: 6px 6px 0 var(--accent, #ddd);
   display: flex;
   flex-direction: column;
 }
 
+/* a second, slightly-off outline in the card's color, like it was traced twice */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -5px -3px -2px -6px;
+  border: 2px solid var(--accent, #ddd);
+  border-radius: 225px 20px 255px 12px / 20px 255px 12px 225px;
+  transform: rotate(-1.2deg);
+  pointer-events: none;
+}
+
 .card h2 {
   margin: 0 0 8px;
-  font-size: 2rem;
+  font-size: 1.6rem;
+  font-weight: 400;
 }
 
 .card p { margin: 0 0 12px; }
@@ -124,7 +138,7 @@ footer {
   display: flex;
   justify-content: center;
   gap: 18px;
-  margin: 0 0 8px;
+  margin: 8px 0 0;
 }
 
 .social a {
