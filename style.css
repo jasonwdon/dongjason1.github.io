@@ -9,6 +9,9 @@
 
 * { box-sizing: border-box; }
 
+/* keep content centered in the window when a scrollbar shows */
+html { scrollbar-gutter: stable both-edges; }
+
 body {
   margin: 0;
   padding: 0 16px;
