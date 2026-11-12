@@ -17,6 +17,7 @@
   --font:Arial, "Helvetica Neue", Helvetica, "Liberation Sans", sans-serif;
   color-scheme:only dark;
 }
+html{scrollbar-gutter:stable both-edges;background:var(--bg)}
 body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
 .col{max-width:46rem;margin:0 auto;padding-block:3rem 4rem;display:flex;flex-direction:column;gap:4.5rem}
@@ -40,7 +41,7 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);
 .slide .tiny{font-size:clamp(.7rem,2vw,.82rem);color:#D6D6D6;max-width:34rem;margin:0;line-height:1.35}
 
 .talk{max-width:38rem;font-size:1.05rem;line-height:1.7;color:var(--talk);padding-left:1.1rem;border-left:2px solid var(--slide-edge)}
-.talk p{margin:0 0 1rem}.talk p:last-child{margin:0}
+.talk p{margin:0 0 1rem;text-wrap:pretty}.talk p:last-child{margin:0}
 .talk em{color:var(--fg)}
 
 .verbs{display:grid;grid-template-columns:auto auto;gap:clamp(.6rem,2.4vw,1.1rem) clamp(1.5rem,7vw,4rem);text-align:left;align-items:start}
