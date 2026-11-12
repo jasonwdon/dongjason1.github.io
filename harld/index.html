@@ -3,29 +3,25 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="only dark">
+<meta name="theme-color" content="#221e48">
 <title>harld</title>
 <meta name="description" content="The time we found out we could email anyone at school as anyone.">
 <style>
+  /* One look only: a purple navy matching the harld tile on the home page.
+     A shade darker than the tile's #2e2a5e, because a whole page of it reads
+     much lighter than the tile's thin edge and button. */
   :root{
-    --bg:#fbfbf9;
-    --fg:#1c1c1a;
-    --muted:#6b6b64;
-    --rule:#e6e4dd;
-    --link:#b5451b;
-    --link-hover:#8f3413;
-    --card:#f3f1ea;
+    --bg:#221e48;
+    --fg:#eeedf6;
+    --muted:#b6b2d6;
+    --rule:#3d3872;
+    --link:#ff8a5e;
+    --link-hover:#ffa784;
+    --card:#2e2a5e;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-  }
-  @media (prefers-color-scheme: dark){
-    :root:not([data-theme="light"]){
-      --bg:#17171a; --fg:#e9e8e3; --muted:#9a998f; --rule:#2c2c30;
-      --link:#ff7a4d; --link-hover:#ff9670; --card:#202024;
-    }
-  }
-  :root[data-theme="dark"]{
-    --bg:#17171a; --fg:#e9e8e3; --muted:#9a998f; --rule:#2c2c30;
-    --link:#ff7a4d; --link-hover:#ff9670; --card:#202024;
+    color-scheme: only dark;
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
