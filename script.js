@@ -26,6 +26,8 @@
 
 // Two tiles across only while every title and description fits on one line.
 // As soon as any of them would wrap, the grid drops to a single column.
+// In a single column (phones), a description that would still wrap shrinks
+// a little to stay on one line, down to 75% of its size.
 (function () {
   var grid = document.querySelector('.grid');
   if (!grid) return;
@@ -37,12 +39,31 @@
     return over;
   }
 
+  function shrinkToFit(p) {
+    p.style.whiteSpace = 'nowrap';
+    var size = parseFloat(getComputedStyle(p).fontSize), smallest = size * 0.75;
+    while (p.scrollWidth > p.clientWidth && size > smallest) {
+      size -= 0.5;
+      p.style.fontSize = size + 'px';
+    }
+    if (p.scrollWidth > p.clientWidth) {
+      p.style.fontSize = '';
+      p.style.whiteSpace = '';
+    }
+  }
+
   function layout() {
+    var descs = grid.querySelectorAll('.card .desc');
+    [].forEach.call(descs, function (p) { p.style.fontSize = ''; p.style.whiteSpace = ''; });
     grid.classList.remove('one-column');
+
     var columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-    if (columns < 2) return;
-    var tooLong = [].some.call(grid.querySelectorAll('.card h2, .card .desc'), wraps);
-    grid.classList.toggle('one-column', tooLong);
+    if (columns > 1) {
+      var tooLong = [].some.call(grid.querySelectorAll('.card h2, .card .desc'), wraps);
+      if (!tooLong) return;
+      grid.classList.add('one-column');
+    }
+    [].forEach.call(descs, shrinkToFit);
   }
 
   var timer;
