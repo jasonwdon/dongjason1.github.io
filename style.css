@@ -54,13 +54,26 @@ a {
 .card {
   background: var(--card);
   border: 3px solid var(--ink);
-  /* uneven radii give a hand-drawn wobble; each tile gets its own below */
+  /* uneven radii give a hand-drawn wobble; script.js gives each tile its own */
   border-radius: var(--shape, 255px 15px 225px 15px / 15px 225px 15px 255px);
   padding: 24px 26px;
   transform: rotate(var(--tilt, 0deg));
   box-shadow: 6px 6px 0 var(--accent, #ddd);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
   display: flex;
   flex-direction: column;
+}
+
+/* lift the tile off the page: it rises up-left while its shadow stays put */
+@media (hover: hover) {
+  .card:hover {
+    transform: rotate(var(--tilt, 0deg)) translate(-3px, -4px);
+    box-shadow: 9px 10px 0 var(--accent, #ddd);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transition: none; }
 }
 
 .card h2 {
@@ -143,24 +156,3 @@ footer {
   .card { transform: none; }
 }
 
-/* Six hand-drawn outlines, cycled down the grid so neighbouring tiles
-   never match. The colored shadow follows each shape. */
-.card:nth-child(6n+2) {
-  --shape: 15px 225px 15px 255px / 255px 15px 225px 15px;
-}
-
-.card:nth-child(6n+3) {
-  --shape: 125px 10px 20px 185px / 25px 205px 205px 25px;
-}
-
-.card:nth-child(6n+4) {
-  --shape: 10px 160px 25px 230px / 200px 20px 160px 15px;
-}
-
-.card:nth-child(6n+5) {
-  --shape: 30px 180px 40px 120px / 140px 40px 190px 25px;
-}
-
-.card:nth-child(6n+6) {
-  --shape: 200px 30px 160px 20px / 20px 150px 30px 220px;
-}
