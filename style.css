@@ -60,6 +60,10 @@ a {
 /* set by script.js when a title or description would wrap at two across */
 .grid.one-column { grid-template-columns: 1fr; }
 
+/* a tile is never wider than one of two across at full width
+   ((960px - 28px gap) / 2), so a single column keeps that width, centred */
+.grid > .card { width: 100%; max-width: 466px; justify-self: center; }
+
 .card {
   position: relative;
   background: var(--card);
