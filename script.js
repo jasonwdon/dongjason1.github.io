@@ -24,31 +24,32 @@
   });
 })();
 
-// Keep each tile's description on one line: if it would wrap, shrink its
-// text a little until it fits. Below 75% of the normal size it is allowed
-// to wrap instead, so it stays readable on very narrow screens.
+// Two tiles across only while every title and description fits on one line.
+// As soon as any of them would wrap, the grid drops to a single column.
 (function () {
-  function fit() {
-    document.querySelectorAll('.card .desc').forEach(function (p) {
-      p.style.fontSize = '';
-      p.style.whiteSpace = 'nowrap';
-      var size = parseFloat(getComputedStyle(p).fontSize), smallest = size * 0.75;
-      while (p.scrollWidth > p.clientWidth && size > smallest) {
-        size -= 0.5;
-        p.style.fontSize = size + 'px';
-      }
-      if (p.scrollWidth > p.clientWidth) {
-        p.style.fontSize = '';
-        p.style.whiteSpace = '';
-      }
-    });
+  var grid = document.querySelector('.grid');
+  if (!grid) return;
+
+  function wraps(el) {
+    el.style.whiteSpace = 'nowrap';
+    var over = el.scrollWidth > el.clientWidth;
+    el.style.whiteSpace = '';
+    return over;
+  }
+
+  function layout() {
+    grid.classList.remove('one-column');
+    var columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
+    if (columns < 2) return;
+    var tooLong = [].some.call(grid.querySelectorAll('.card h2, .card .desc'), wraps);
+    grid.classList.toggle('one-column', tooLong);
   }
 
   var timer;
   window.addEventListener('resize', function () {
     clearTimeout(timer);
-    timer = setTimeout(fit, 100);
+    timer = setTimeout(layout, 100);
   });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
-  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
+  layout();
 })();

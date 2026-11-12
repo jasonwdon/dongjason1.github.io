@@ -57,6 +57,9 @@ a {
   gap: 28px;
 }
 
+/* set by script.js when a title or description would wrap at two across */
+.grid.one-column { grid-template-columns: 1fr; }
+
 .card {
   position: relative;
   background: var(--card);
