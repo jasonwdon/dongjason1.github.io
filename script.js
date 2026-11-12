@@ -79,6 +79,17 @@
     pending = true;
     requestAnimationFrame(function () { pending = false; fit(); });
   });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
   measure();
+
+  // Once Gaegu has arrived, measure with it and show the page.
+  function reveal() {
+    measure();
+    requestAnimationFrame(function () { document.documentElement.classList.remove('loading'); });
+  }
+  if (document.fonts && document.fonts.load) {
+    Promise.all([document.fonts.load('400 22px Gaegu'), document.fonts.load('700 22px Gaegu')])
+      .then(reveal, reveal);
+  } else {
+    reveal();
+  }
 })();

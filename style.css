@@ -9,6 +9,12 @@
 
 * { box-sizing: border-box; }
 
+/* hidden while the font loads (see the script in index.html's head), then
+   faded in; the paper background shows the whole time */
+body > * { transition: opacity .2s ease; }
+html.loading body > * { opacity: 0; }
+@media (prefers-reduced-motion: reduce) { body > * { transition: none; } }
+
 body {
   margin: 0;
   padding: 0 16px;
