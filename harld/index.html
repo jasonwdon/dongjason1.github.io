@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="only dark">
-<meta name="theme-color" content="#221e48">
+<meta name="theme-color" content="#12131c">
 <title>harld</title>
 <meta name="description" content="The time we found out we could email anyone at school as anyone.">
 <style>
-  /* One look only: a purple navy matching the harld tile on the home page.
-     A shade darker than the tile's #2e2a5e, because a whole page of it reads
-     much lighter than the tile's thin edge and button. */
+  /* One look only: near-black with a hint of blue, cream text and warm links.
+     The flat color is about what a faint grain over #0c0d18 averages to,
+     taken a touch darker. */
   :root{
-    --bg:#221e48;
-    --fg:#eeedf6;
-    --muted:#b6b2d6;
-    --rule:#3d3872;
-    --link:#ff8a5e;
-    --link-hover:#ffa784;
-    --card:#2e2a5e;
+    --bg:#12131c;
+    --fg:#efe8d8;
+    --muted:#b0b6cc;
+    --rule:color-mix(in srgb, #efe8d8 14%, transparent);
+    --link:#e9a86b;
+    --link-hover:#f0bf8c;
+    --code:#171a2e;
     --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
     color-scheme: only dark;
@@ -50,7 +50,7 @@
   /* code figure */
   figure{margin:30px 0;}
   pre.code{
-    background:#1e1e22; color:#e6e6e6; font-family:var(--mono);
+    background:var(--code); color:#e6e6e6; font-family:var(--mono);
     font-size:13.5px; line-height:1.6; margin:0; padding:18px 20px;
     border-radius:10px; overflow-x:auto;
     border:1px solid rgba(255,255,255,0.06);
