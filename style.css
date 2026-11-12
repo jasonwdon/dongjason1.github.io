@@ -3,6 +3,8 @@
   --muted: #555;
   --paper: #fffdf7;
   --card: #ffffff;
+  /* one look only: no dark mode, and no browser auto-darkening */
+  color-scheme: only light;
 }
 
 * { box-sizing: border-box; }
@@ -122,6 +124,10 @@ a {
 }
 
 .button:hover { background: var(--ink); color: var(--paper); }
+
+/* a button on a dark tile color (harld's navy) flips to light on hover */
+.button.on-dark { color: var(--paper); }
+.button.on-dark:hover { background: var(--paper); color: var(--accent); }
 
 /* the tile's main button stretches an invisible layer over the whole tile,
    so a click anywhere on it opens the project */
