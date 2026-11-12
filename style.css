@@ -48,10 +48,14 @@ a {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* every row as tall as the tallest tile, so all tiles match and the
+     buttons at their feet line up */
+  grid-auto-rows: 1fr;
   gap: 28px;
 }
 
 .card {
+  position: relative;
   background: var(--card);
   border: 3px solid var(--ink);
   /* uneven radii give a hand-drawn wobble; script.js gives each tile its own */
@@ -117,6 +121,20 @@ a {
 }
 
 .button:hover { background: var(--ink); color: var(--paper); }
+
+/* the tile's main button stretches an invisible layer over the whole tile,
+   so a click anywhere on it opens the project */
+.button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+/* other links on the tile (like Source) sit above that layer */
+.actions a:not(.button) {
+  position: relative;
+  z-index: 1;
+}
 
 .badge {
   font-size: 0.85em;
