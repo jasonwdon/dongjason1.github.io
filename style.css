@@ -49,16 +49,20 @@ a {
 
 .grid {
   display: grid;
-  /* two tiles across at most; one when there isn't room for two 280px tiles */
-  grid-template-columns: repeat(auto-fit, minmax(max(280px, calc((100% - 28px) / 2)), 1fr));
+  /* two tiles across at most, and only when each tile is at least
+     --tile-min wide: the widest title or description on one line, measured
+     by script.js. Otherwise every tile drops to one column together. */
+  grid-template-columns: repeat(auto-fit,
+    minmax(min(100%, max(var(--tile-min, 280px), calc((100% - 28px) / 2))), 1fr));
   /* every row as tall as the tallest tile, so all tiles match and the
      buttons at their feet line up */
   grid-auto-rows: 1fr;
   gap: 28px;
 }
 
-/* set by script.js when a title or description would wrap at two across */
-.grid.one-column { grid-template-columns: 1fr; }
+/* a tile is never wider than one of two across at full width
+   ((960px - 28px gap) / 2), so a single column keeps that width, centred */
+.grid > .card { width: 100%; max-width: max(466px, var(--tile-min, 0px)); justify-self: center; }
 
 .card {
   position: relative;
