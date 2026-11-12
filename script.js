@@ -24,56 +24,61 @@
   });
 })();
 
-// Two tiles across only while every title and description fits on one line.
-// As soon as any of them would wrap, the grid drops to a single column.
-// In a single column (phones), a description that would still wrap shrinks
-// a little to stay on one line, down to 75% of its size.
+// Two tiles across only when every title and description fits on one line.
+// The widest line is measured once (again when the font arrives) and handed
+// to CSS as --tile-min; CSS then drops all tiles to one column together, with
+// nothing running while the window is dragged.
+// On a narrow screen, a description that still would wrap shrinks a little,
+// down to 75% of its size.
 (function () {
   var grid = document.querySelector('.grid');
   if (!grid) return;
+  var tileMin = 0, shrunk = false;
 
-  function wraps(el) {
-    el.style.whiteSpace = 'nowrap';
-    var over = el.scrollWidth > el.clientWidth;
-    el.style.whiteSpace = '';
-    return over;
+  function measure() {
+    var widest = 0;
+    [].forEach.call(grid.querySelectorAll('.card h2, .card .desc'), function (el) {
+      el.style.fontSize = '';
+      el.style.width = 'max-content'; // the line's own width, not the tile's
+      widest = Math.max(widest, el.offsetWidth + 1); // +1 for rounding
+      el.style.width = '';
+    });
+    var card = grid.querySelector('.card');
+    if (!card) return;
+    var cs = getComputedStyle(card);
+    tileMin = Math.ceil(widest + parseFloat(cs.paddingLeft) + parseFloat(cs.paddingRight) +
+                        parseFloat(cs.borderLeftWidth) + parseFloat(cs.borderRightWidth));
+    grid.style.setProperty('--tile-min', tileMin + 'px');
+    shrunk = true; // force a fresh fit
+    fit();
   }
 
   function shrinkToFit(p) {
     p.style.whiteSpace = 'nowrap';
     var size = parseFloat(getComputedStyle(p).fontSize), smallest = size * 0.75;
-    while (p.scrollWidth > p.clientWidth && size > smallest) {
-      size -= 0.5;
-      p.style.fontSize = size + 'px';
-    }
-    if (p.scrollWidth > p.clientWidth) {
-      p.style.fontSize = '';
-      p.style.whiteSpace = '';
-    }
+    while (p.scrollWidth > p.clientWidth && size > smallest) { size -= 0.5; p.style.fontSize = size + 'px'; }
+    if (p.scrollWidth > p.clientWidth) { p.style.fontSize = ''; p.style.whiteSpace = ''; }
+    else if (p.style.fontSize) shrunk = true;
+    else p.style.whiteSpace = '';
   }
 
-  function layout() {
+  // Only does work when the grid is narrower than the widest line (phones),
+  // or to undo an earlier shrink. Wider windows return at once.
+  function fit() {
+    var narrow = grid.clientWidth < tileMin;
+    if (!narrow && !shrunk) return;
     var descs = grid.querySelectorAll('.card .desc');
     [].forEach.call(descs, function (p) { p.style.fontSize = ''; p.style.whiteSpace = ''; });
-    grid.classList.remove('one-column');
-
-    var columns = getComputedStyle(grid).gridTemplateColumns.split(' ').length;
-    if (columns > 1) {
-      var tooLong = [].some.call(grid.querySelectorAll('.card h2, .card .desc'), wraps);
-      if (!tooLong) return;
-      grid.classList.add('one-column');
-    }
-    [].forEach.call(descs, shrinkToFit);
+    shrunk = false;
+    if (narrow) [].forEach.call(descs, shrinkToFit);
   }
 
-  // Re-check on every frame while the window is resized, so the grid never
-  // sits in the wrong layout and then snaps (a delayed check made it stutter).
   var pending = false;
   window.addEventListener('resize', function () {
     if (pending) return;
     pending = true;
-    requestAnimationFrame(function () { pending = false; layout(); });
+    requestAnimationFrame(function () { pending = false; fit(); });
   });
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
-  layout();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
 })();
