@@ -47,7 +47,8 @@ a {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  /* two tiles across at most; one when there isn't room for two 280px tiles */
+  grid-template-columns: repeat(auto-fit, minmax(max(280px, calc((100% - 28px) / 2)), 1fr));
   /* every row as tall as the tallest tile, so all tiles match and the
      buttons at their feet line up */
   grid-auto-rows: 1fr;
