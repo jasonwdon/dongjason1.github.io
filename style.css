@@ -1,7 +1,7 @@
 :root {
   --ink: #222;
   --muted: #555;
-  --paper: #efeadf;
+  --paper: #fffdf7;
   --card: #ffffff;
 }
 
@@ -12,9 +12,9 @@ body {
   padding: 0 16px;
   background: var(--paper);
   color: var(--ink);
-  font-family: 'Atkinson Hyperlegible Next', 'Atkinson Hyperlegible', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  font-size: 19px;
-  line-height: 1.5;
+  font-family: 'Gaegu', 'Comic Sans MS', cursive;
+  font-size: 22px;
+  line-height: 1.35;
 }
 
 header, main, footer {
@@ -29,8 +29,6 @@ header {
 
 h1 {
   font-size: 3.2rem;
-  font-weight: 300;
-  letter-spacing: -0.02em;
   margin: 0 0 8px;
 }
 
@@ -54,65 +52,20 @@ a {
 }
 
 .card {
-  position: relative;
   background: var(--card);
-  border: 2.5px solid var(--ink);
+  border: 3px solid var(--ink);
   /* uneven radii give a hand-drawn wobble; each tile gets its own below */
   border-radius: var(--shape, 255px 15px 225px 15px / 15px 225px 15px 255px);
   padding: 24px 26px;
   transform: rotate(var(--tilt, 0deg));
+  box-shadow: 6px 6px 0 var(--accent, #ddd);
   display: flex;
   flex-direction: column;
 }
 
-/* a second, slightly-off outline in the card's color, like it was traced twice */
-.card::before {
-  content: "";
-  position: absolute;
-  inset: var(--trace-inset, -5px -3px -2px -6px);
-  border: 2px solid var(--accent, #ddd);
-  border-radius: var(--trace, 225px 20px 255px 12px / 20px 255px 12px 225px);
-  transform: rotate(var(--trace-turn, -1.2deg));
-  pointer-events: none;
-}
-
-/* Six hand-drawn shapes, cycled down the grid so neighbouring tiles never
-   match. --shape is the ink outline, --trace the colored second pass. */
-.card:nth-child(6n+2) {
-  --shape: 15px 225px 15px 255px / 255px 15px 225px 15px;
-  --trace: 20px 240px 12px 200px / 230px 18px 250px 14px;
-  --trace-inset: -3px -6px -5px -2px;
-  --trace-turn: 1deg;
-}
-.card:nth-child(6n+3) {
-  --shape: 125px 10px 20px 185px / 25px 205px 205px 25px;
-  --trace: 140px 18px 12px 165px / 30px 180px 225px 20px;
-  --trace-inset: -2px -5px -6px -4px;
-  --trace-turn: 0.8deg;
-}
-.card:nth-child(6n+4) {
-  --shape: 10px 160px 25px 230px / 200px 20px 160px 15px;
-  --trace: 18px 140px 15px 205px / 220px 28px 185px 22px;
-  --trace-inset: -6px -2px -4px -5px;
-  --trace-turn: -0.7deg;
-}
-.card:nth-child(6n+5) {
-  --shape: 30px 180px 40px 120px / 140px 40px 190px 25px;
-  --trace: 22px 200px 50px 140px / 165px 30px 170px 35px;
-  --trace-inset: -4px -4px -6px -3px;
-  --trace-turn: 1.4deg;
-}
-.card:nth-child(6n+6) {
-  --shape: 200px 30px 160px 20px / 20px 150px 30px 220px;
-  --trace: 175px 22px 185px 30px / 28px 170px 22px 200px;
-  --trace-inset: -5px -6px -3px -2px;
-  --trace-turn: -1.5deg;
-}
-
 .card h2 {
   margin: 0 0 8px;
-  font-size: 1.6rem;
-  font-weight: 400;
+  font-size: 2rem;
 }
 
 .card p { margin: 0 0 12px; }
@@ -188,4 +141,26 @@ footer {
   h1 { font-size: 2.4rem; }
   header { padding-top: 36px; }
   .card { transform: none; }
+}
+
+/* Six hand-drawn outlines, cycled down the grid so neighbouring tiles
+   never match. The colored shadow follows each shape. */
+.card:nth-child(6n+2) {
+  --shape: 15px 225px 15px 255px / 255px 15px 225px 15px;
+}
+
+.card:nth-child(6n+3) {
+  --shape: 125px 10px 20px 185px / 25px 205px 205px 25px;
+}
+
+.card:nth-child(6n+4) {
+  --shape: 10px 160px 25px 230px / 200px 20px 160px 15px;
+}
+
+.card:nth-child(6n+5) {
+  --shape: 30px 180px 40px 120px / 140px 40px 190px 25px;
+}
+
+.card:nth-child(6n+6) {
+  --shape: 200px 30px 160px 20px / 20px 150px 30px 220px;
 }
