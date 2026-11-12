@@ -66,10 +66,13 @@
     [].forEach.call(descs, shrinkToFit);
   }
 
-  var timer;
+  // Re-check on every frame while the window is resized, so the grid never
+  // sits in the wrong layout and then snaps (a delayed check made it stutter).
+  var pending = false;
   window.addEventListener('resize', function () {
-    clearTimeout(timer);
-    timer = setTimeout(layout, 100);
+    if (pending) return;
+    pending = true;
+    requestAnimationFrame(function () { pending = false; layout(); });
   });
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(layout);
   layout();
