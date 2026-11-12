@@ -28,10 +28,10 @@ body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font);
 .slide .n{position:absolute;right:.8rem;bottom:.6rem;font-size:.7rem;color:var(--muted);font-variant-numeric:tabular-nums}
 .slide h1{font-weight:400;font-size:clamp(2rem,7vw,3.4rem);margin:0;line-height:1.1}
 .slide .sub{font-size:clamp(1.05rem,3.4vw,1.6rem);color:#A6A6A6;margin:0}
-.slide .by{font-size:clamp(.8rem,2.2vw,.95rem);color:#D0D0D0;margin:.6rem 0 0}
-.slide .by a{color:inherit;text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:.2em;cursor:pointer;transition:color .15s ease,text-decoration-color .15s ease}
-.slide .by a:hover{color:var(--fg);text-decoration-color:currentColor}
-.slide .ctx{font-size:clamp(.72rem,2vw,.85rem);color:var(--muted);margin:0}
+.masthead{display:flex;flex-direction:column;align-items:center;gap:.4rem;text-align:center;margin-bottom:-2.9rem}
+.masthead .ctx{font-size:1.15rem;color:#E6E6E6;margin:0}
+.masthead .by{font-size:.9rem;color:var(--muted);text-decoration:underline;text-decoration-color:var(--muted);text-underline-offset:.2em;cursor:pointer;transition:color .15s ease,text-decoration-color .15s ease}
+.masthead .by:hover{color:var(--fg);text-decoration-color:currentColor}
 .slide .big{font-size:clamp(1.6rem,5.5vw,2.6rem);margin:0}
 .slide .q{font-size:clamp(1rem,3.2vw,1.45rem);margin:0;line-height:1.3}
 .slide .q.sm{font-size:clamp(.9rem,2.6vw,1.1rem)}
@@ -62,6 +62,9 @@ a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 /* Wider screens: slides grow to fill most of the viewport (16:9), leaving room for the talk text below, and everything is centered. Phones keep the layout above. */
 :root{--vh:1vh}
 @supports (height:100svh){:root{--vh:1svh}}
+@media (min-width:40rem){
+  .talk{width:fit-content;margin-inline:auto}
+}
 @media (min-width:48rem) and (min-height:30rem){
   :root{--sw:min(calc(100vw - 2rem), calc((100 * var(--vh) - 13rem) * 16 / 9))}
   .col{max-width:none}
@@ -70,8 +73,6 @@ a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
   .slide .n{font-size:max(.7rem, calc(var(--sw) * .0152))}
   .slide h1{font-size:max(2rem, calc(var(--sw) * .0739))}
   .slide .sub{font-size:max(1.05rem, calc(var(--sw) * .0348))}
-  .slide .by{font-size:max(.8rem, calc(var(--sw) * .0207))}
-  .slide .ctx{font-size:max(.72rem, calc(var(--sw) * .0185))}
   .slide .big{font-size:max(1.6rem, calc(var(--sw) * .0565))}
   .slide .q{font-size:max(1rem, calc(var(--sw) * .0315))}
   .slide .q.sm{font-size:max(.9rem, calc(var(--sw) * .0239))}
@@ -83,19 +84,21 @@ a:focus-visible{outline:2px solid var(--link);outline-offset:2px}
   .slide svg{max-width:calc(var(--sw) * .652)}
   .sources h2{font-size:max(1.1rem, calc(var(--sw) * .0348))}
   .sources ul{font-size:max(.8rem, calc(var(--sw) * .0207))}
-  .talk{width:100%}
 }
 </style>
 </head>
 <body>
 <div class="col">
 
+<header class="masthead">
+  <p class="ctx">A Lightning Talk from Etsy's Eng Week, 2021</p>
+  <a class="by" href="/">By Jason</a>
+</header>
+
 <div class="block">
   <div class="slide">
     <h1>Time is Made Up</h1>
     <p class="sub">A Linguistic Perspective</p>
-    <p class="by"><a href="/">By Jason</a></p>
-    <p class="ctx">A lightning talk from Etsy's Eng Week, 2021</p>
   </div>
   <div class="talk"><p>The idea for this talk came from a classic overfixation from a bunch of linguistics nerds.</p></div>
 </div>
