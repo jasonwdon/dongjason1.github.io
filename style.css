@@ -87,8 +87,9 @@ a {
   flex-direction: column;
 }
 
-/* lift the tile off the page: it rises up-left while its shadow stays put */
-@media (hover: hover) {
+/* lift the tile off the page: it rises up-left while its shadow stays put.
+   Only with a mouse: on a touch screen a hover sticks after scrolling. */
+@media (hover: hover) and (pointer: fine) {
   .card:hover {
     transform: rotate(var(--tilt, 0deg)) translate(-3px, -4px);
     box-shadow: 9px 10px 0 var(--accent, #ddd);
@@ -139,11 +140,17 @@ a {
   background: var(--accent, #eee);
 }
 
-.button:hover { background: var(--ink); color: var(--paper); }
+.button:focus-visible { background: var(--ink); color: var(--paper); }
+@media (hover: hover) and (pointer: fine) {
+  .button:hover { background: var(--ink); color: var(--paper); }
+}
 
 /* a button on a dark tile color (harld's navy) flips to light on hover */
 .button.on-dark { color: var(--paper); }
-.button.on-dark:hover { background: var(--paper); color: var(--accent); }
+.button.on-dark:focus-visible { background: var(--paper); color: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .button.on-dark:hover { background: var(--paper); color: var(--accent); }
+}
 
 /* the tile's main button stretches an invisible layer over the whole tile,
    so a click anywhere on it opens the project */
@@ -188,8 +195,10 @@ footer {
   transition: transform 0.15s ease;
 }
 
-.social a:hover,
 .social a:focus-visible { transform: rotate(-6deg) scale(1.1); }
+@media (hover: hover) and (pointer: fine) {
+  .social a:hover { transform: rotate(-6deg) scale(1.1); }
+}
 
 @media (max-width: 480px) {
   h1 { font-size: 2.4rem; }
