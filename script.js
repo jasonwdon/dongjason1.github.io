@@ -28,7 +28,7 @@
 // The widest line is measured once (again when the font arrives) and handed
 // to CSS as --tile-min; CSS then drops all tiles to one column together, with
 // nothing running while the window is dragged.
-// On a narrow screen, a description that still would wrap shrinks a little,
+// On a narrow screen, a title or description that still would wrap shrinks a little,
 // down to 75% of its size.
 (function () {
   var grid = document.querySelector('.grid');
@@ -67,7 +67,7 @@
   function fit() {
     var narrow = grid.clientWidth < tileMin;
     if (!narrow && !shrunk) return;
-    var descs = grid.querySelectorAll('.card .desc');
+    var descs = grid.querySelectorAll('.card h2, .card .desc');
     [].forEach.call(descs, function (p) { p.style.fontSize = ''; p.style.whiteSpace = ''; });
     shrunk = false;
     if (narrow) [].forEach.call(descs, shrinkToFit);
