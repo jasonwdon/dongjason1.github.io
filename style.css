@@ -105,6 +105,9 @@ a {
   font-size: 2rem;
 }
 
+/* a small "(WIP)" beside a title, so the title still fits on one line */
+.card h2 .wip { font-size: 0.6em; }
+
 .card p { margin: 0 0 12px; }
 
 .tags {
